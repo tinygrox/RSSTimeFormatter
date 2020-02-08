@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using KSP.Localization;
 
 namespace RSSTimeFormatter
 {
@@ -32,11 +33,11 @@ namespace RSSTimeFormatter
 				return badStr;
 			}
 			int[] timeIntervals = GetDateFromUT(time);
-			string timeStr = AddUnits(timeIntervals[4], "Year", "Years");
-			timeStr += ", " + AddUnits(timeIntervals[3], "Day", "Days");
-			timeStr += ", " + AddUnits(timeIntervals[2], "Hour", "Hours");
-			timeStr += ", " + AddUnits(timeIntervals[1], "Min", "Mins");
-			timeStr += ", " + AddUnits(timeIntervals[0], "Sec", "Secs");
+			string timeStr = AddUnits(timeIntervals[4], Localizer.Format("#autoLOC_6002322"), Localizer.Format("#autoLOC_6002323"));//"Year""Years"
+			timeStr += ", " + AddUnits(timeIntervals[3], Localizer.Format("#autoLOC_6002324"), Localizer.Format("#autoLOC_6002325"));//"Day""Days"
+			timeStr += ", " + AddUnits(timeIntervals[2], Localizer.Format("#autoLOC_6002326"), Localizer.Format("#autoLOC_6002327"));//"Hour""Hours"
+			timeStr += ", " + AddUnits(timeIntervals[1], Localizer.Format("#autoLOC_6002328"), Localizer.Format("#autoLOC_6002329"));//"Min""Mins"
+			timeStr += ", " + AddUnits(timeIntervals[0], Localizer.Format("#autoLOC_6002330"), Localizer.Format("#autoLOC_6002331"));//"Sec""Secs"
 			return timeStr;
 		}
 		public string PrintTimeStamp(double time, bool days = false, bool years = false)
@@ -48,10 +49,10 @@ namespace RSSTimeFormatter
 			int[] timeIntervals = GetDateFromUT(time);
 			string timeStr = "";
 			if (years) {
-				timeStr += "Year " + timeIntervals[4] + ", ";
+				timeStr += Localizer.Format("#autoLOC_6002322") + " " + timeIntervals[4] + ", ";//Year
 			}
 			if (days) {
-				timeStr += "Day " + timeIntervals[3] + " - ";
+				timeStr += Localizer.Format("#autoLOC_6002324") + " " + timeIntervals[3] + " - ";//Day
 			}
 			timeStr += timeIntervals[2].ToString("00");
 			timeStr += ":" + timeIntervals[1].ToString("00");
@@ -68,10 +69,10 @@ namespace RSSTimeFormatter
 			int[] timeIntervals = GetDateFromUT(time);
 			string timeStr = "";
 			if (years) {
-				timeStr += timeIntervals[4].ToString() + "y, ";
+				timeStr += timeIntervals[4].ToString() + Localizer.Format("#autoLOC_6002321") + ", ";//y
 			}
 			if (days) {
-				timeStr += timeIntervals[3].ToString() + "d, ";
+				timeStr += timeIntervals[3].ToString() + Localizer.Format("#autoLOC_6002320") + ", ";//d
 			}
 			timeStr += timeIntervals[2].ToString("00");
 			timeStr += ":" + timeIntervals[1].ToString("00");
@@ -90,7 +91,7 @@ namespace RSSTimeFormatter
 
 			string[] intervalCaptions = new string[]
 				{
-					"s", "m", "h", "d", "y"
+					Localizer.Format("#autoLOC_6002317"), Localizer.Format("#autoLOC_6002318"), Localizer.Format("#autoLOC_6002319"), Localizer.Format("#autoLOC_6002320"), Localizer.Format("#autoLOC_6002321")//"s""m""h""d""y"
 				};
 
 			string timeString = isNegative ? "- " : (explicitPositive ? "+ " : "");
@@ -188,23 +189,23 @@ namespace RSSTimeFormatter
 			int[] saveDate = GetDateFromUT(time);
 
 			if (saveDate[4] > 1) {
-				date += saveDate[4].ToString() + " years";
+				date += saveDate[4].ToString() + " " + Localizer.Format("#autoLOC_6002335");//years
 			}
 			else if (saveDate[4] == 1) {
-				date += saveDate[4].ToString() + " year";
+				date += saveDate[4].ToString() + " " + Localizer.Format("#autoLOC_6002334");//year
 			}
 
 			if (saveDate[3] > 1) {
 				if (date != "")
 					date += ", ";
 
-				date += saveDate[3].ToString() + " days";
+				date += saveDate[3].ToString() + " " + Localizer.Format("#autoLOC_6002336");//days
 			}
 			else if (saveDate[3] == 1) {
 				if (date != "")
 					date += ", ";
 
-				date += saveDate[3].ToString() + " day";
+				date += saveDate[3].ToString() + " "+Localizer.Format("#autoLOC_6002337");//day
 			}
 
 			if (includeTime) {
@@ -212,26 +213,26 @@ namespace RSSTimeFormatter
 					if (date != "")
 						date += ", ";
 
-					date += saveDate[2].ToString() + " hours";
+					date += saveDate[2].ToString() + " "+Localizer.Format("#autoLOC_6002339");//hours
 				}
 				else if (saveDate[2] == 1) {
 					if (date != "")
 						date += ", ";
 
-					date += saveDate[2].ToString() + " hour";
+					date += saveDate[2].ToString() + " "+Localizer.Format("#autoLOC_6002338");//hour
 				}
 
 				if (saveDate[1] > 1) {
 					if (date != "")
 						date += ", ";
 
-					date += saveDate[1].ToString() + " minutes";
+					date += saveDate[1].ToString() + " "+Localizer.Format("#autoLOC_6002340");//minutes
 				}
 				else if (saveDate[1] == 1) {
 					if (date != "")
 						date += ", ";
 
-					date += saveDate[1].ToString() + " minute";
+					date += saveDate[1].ToString() + " "+Localizer.Format("#autoLOC_6002341");//minute
 				}
 
 				if (includeSeconds) {
@@ -239,19 +240,19 @@ namespace RSSTimeFormatter
 						if (date != "")
 							date += ", ";
 
-						date += saveDate[0].ToString() + " seconds";
+						date += saveDate[0].ToString() + " "+Localizer.Format("#autoLOC_6002342");//seconds
 					}
 					else if (saveDate[0] == 1) {
 						if (date != "")
 							date += ", ";
 
-						date += saveDate[0].ToString() + " second";
+						date += saveDate[0].ToString() + " "+Localizer.Format("#autoLOC_6002343");//second
 					}
 				}
 			}
 
 			if (string.IsNullOrEmpty(date))
-				date = includeTime ? (includeSeconds ? "0 seconds" : "0 minutes") : "0 days";
+				date = includeTime ? (includeSeconds ? "0 "+Localizer.Format("#autoLOC_6002342") : "0 "+Localizer.Format("#autoLOC_6002340")) : "0 "+Localizer.Format("#autoLOC_6002336");//seconds minutesdays
 
 			return date;
 		}
@@ -270,14 +271,14 @@ namespace RSSTimeFormatter
 			int[] saveDate = GetDateFromUT(time);
 
 			if (saveDate[4] > 0) {
-				date += saveDate[4].ToString() + "y";
+				date += saveDate[4].ToString() + Localizer.Format("#autoLOC_6002321");//"y"
 			}
 
 			if (saveDate[3] > 0) {
 				if (date != "")
 					date += ", ";
 
-				date += saveDate[3].ToString() + "d";
+				date += saveDate[3].ToString() + Localizer.Format("#autoLOC_6002320");//"d"
 			}
 
 			if (includeTime) {
@@ -285,13 +286,13 @@ namespace RSSTimeFormatter
 					if (date != "")
 						date += ", ";
 
-					date += saveDate[2].ToString() + "h";
+					date += saveDate[2].ToString() + Localizer.Format("#autoLOC_6002319");//"h"
 				}
 				if (saveDate[1] > 0) {
 					if (date != "")
 						date += ", ";
 
-					date += saveDate[1].ToString() + "m";
+					date += saveDate[1].ToString() + Localizer.Format("#autoLOC_6002318");//"m"
 				}
 
 				if (includeSeconds) {
@@ -299,13 +300,13 @@ namespace RSSTimeFormatter
 						if (date != "")
 							date += ", ";
 
-						date += saveDate[0].ToString() + "s";
+						date += saveDate[0].ToString() + Localizer.Format("#autoLOC_6002317");//"s"
 					}
 				}
 			}
 
 			if (string.IsNullOrEmpty(date))
-				date = includeTime ? (includeSeconds ? "0s" : "0m") : "0d";
+				date = includeTime ? (includeSeconds ? "0"+Localizer.Format("#autoLOC_6002317") : "0"+Localizer.Format("#autoLOC_6002318")) : "0"+Localizer.Format("#autoLOC_6002320");//smd
 
 			return date;
 		}
@@ -320,13 +321,13 @@ namespace RSSTimeFormatter
 
 			int[] saveDate = GetDateFromUT(time);
 
-			date += "Year " + (saveDate[4] + 1) + ", Day " + (saveDate[3] + 1);
+			date += Localizer.Format("#autoLOC_6002322") + " " + (saveDate[4] + 1) + ", "+Localizer.Format("#autoLOC_6002324") +" " + (saveDate[3] + 1);//YearDay
 
 			if (includeTime) {
-				date += " - " + saveDate[2] + "h, " + saveDate[1] + "m";
+				date += " - " + saveDate[2] + Localizer.Format("#autoLOC_6002319") +", " + saveDate[1] + Localizer.Format("#autoLOC_6002318");//h"m"
 			}
 			if (includeSeconds) {
-				date += ", " + saveDate[0] + "s";
+				date += ", " + saveDate[0] + Localizer.Format("#autoLOC_6002317");//"s"
 			}
 
 			return date;
@@ -342,7 +343,7 @@ namespace RSSTimeFormatter
 
 			int[] saveDate = GetDateFromUT(time);
 
-			date += "Year " + (saveDate[4] + 1) + ", Day " + (saveDate[3] + 1);
+			date += Localizer.Format("#autoLOC_6002322") + " " + (saveDate[4] + 1) + ", " + Localizer.Format("#autoLOC_6002324") + " " + (saveDate[3] + 1);//YearDay
 
 			if (includeTime) {
 				date += " - " + saveDate[2].ToString("D2") + ":" + saveDate[1].ToString("D2") + ":" + saveDate[0].ToString("D2");
@@ -361,7 +362,7 @@ namespace RSSTimeFormatter
 
 			int[] saveDate = GetDateFromUT(time);
 
-			date += "Y" + (saveDate[4] + 1) + ", D" + (saveDate[3] + 1).ToString("00");
+			date += Localizer.Format("#autoLOC_6002344") + (saveDate[4] + 1) + ", "+ Localizer.Format("#autoLOC_6002345") + (saveDate[3] + 1).ToString("00");//"Y"D
 
 			if (includeTime) {
 				date += ", " + saveDate[2] + ":" + saveDate[1].ToString("00");
